@@ -23,8 +23,7 @@ public class DataTransformerMethod {
     private String implementingClass;
     @Column(nullable = false, name = "TRANSFORMER_METHOD_NAME")
     private String name;
-//    @OneToMany(mappedBy = "dataTransformerMethod", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @OneToMany(mappedBy = "dataTransformerMethod", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "dataTransformerMethod", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     private List<VisualizationMethod> visualizationMethods;
 

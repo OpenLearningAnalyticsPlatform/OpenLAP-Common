@@ -28,13 +28,13 @@ public class VisualizationMethod {
     @JsonIgnore
     private VisualizationFramework visualizationFramework;
     @JoinColumn(name = "DATA_TRANSFORMER_METHOD_FID")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private DataTransformerMethod dataTransformerMethod;
 
     public VisualizationMethod() {
     }
 
-    public VisualizationMethod(String implementingClassName, String name,VisualizationFramework visualizationFramework, DataTransformerMethod dataTransformerMethod) {
+    public VisualizationMethod(String implementingClassName, String name, VisualizationFramework visualizationFramework, DataTransformerMethod dataTransformerMethod) {
         this.implementingClass = implementingClassName;
         this.visualizationFramework = visualizationFramework;
         this.name = name;

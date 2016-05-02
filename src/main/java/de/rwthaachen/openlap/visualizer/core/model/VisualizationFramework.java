@@ -29,8 +29,7 @@ public class VisualizationFramework {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "VIS_FRAMEWORK_ID")
     private long id;
-//    @OneToMany(mappedBy = "visualizationFramework", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-@OneToMany(mappedBy = "visualizationFramework", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "visualizationFramework", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VisualizationMethod> visualizationMethods;
 
     public VisualizationFramework() {
