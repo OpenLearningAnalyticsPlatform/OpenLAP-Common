@@ -17,6 +17,8 @@ public class IndicatorPreviewResponse {
     private long visualizationMethodId;
     OLAPPortConfiguration indicatorToAnalyticsMethodMapping;
     OLAPPortConfiguration analyticsMethodToVisualizationMapping;
+    private boolean isSuccess;
+    private String errorMessage;
 
     public String getVisualizationCode() {
         return visualizationCode;
@@ -72,5 +74,21 @@ public class IndicatorPreviewResponse {
 
     public void setAnalyticsMethodToVisualizationMapping(OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
     }
 }
