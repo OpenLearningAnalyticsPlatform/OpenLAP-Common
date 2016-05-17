@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "Goals")
 public class AnalyticsGoal {
 
-    @Column(columnDefinition = "LONGVARCHAR")
+    @Column(columnDefinition = "TEXT")
     @Convert(converter = AnalyticsMethodMetadataSetConverter.class)
     Set<AnalyticsMethodMetadata> analyticsMethods;
 

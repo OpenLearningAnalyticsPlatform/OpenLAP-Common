@@ -19,23 +19,23 @@ public class Triad {
     @GeneratedValue (strategy = GenerationType.AUTO)
     long id;
 
-    @Column(nullable = false, columnDefinition = "LONGVARCHAR")
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Convert(converter = AnalyticsMethodMetadataConverter.class)
     AnalyticsMethodMetadata analyticsMethodReference;
 
-    @Column(nullable = false, columnDefinition = "LONGVARCHAR")
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Convert(converter = IndicatorReferenceConverter.class)
     IndicatorReference indicatorReference;
 
-    @Column(nullable = false, columnDefinition = "LONGVARCHAR")
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Convert(converter = VisualizerReferenceConverter.class)
     VisualizerReference visualizationReference;
 
-    @Column(columnDefinition = "LONGVARCHAR")
+    @Column(columnDefinition = "TEXT")
     @Convert(converter = OLAPPortConfigurationConverter.class)
     OLAPPortConfiguration indicatorToAnalyticsMethodMapping;
 
-    @Column(columnDefinition = "LONGVARCHAR")
+    @Column(columnDefinition = "TEXT")
     @Convert(converter = OLAPPortConfigurationConverter.class)
     OLAPPortConfiguration analyticsMethodToVisualizationMapping;
 
