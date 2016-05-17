@@ -13,32 +13,34 @@ import java.util.Set;
  * Analytics Goals are created by any user but must be activated before any Analytics Method can be related to it.
  */
 @Entity
+@Table(name = "Goals")
 public class AnalyticsGoal {
 
+    @Column(columnDefinition = "LONGVARCHAR")
+    @Convert(converter = AnalyticsMethodMetadataSetConverter.class)
+    Set<AnalyticsMethodMetadata> analyticsMethods;
+
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "LGOAL_ID")
-    private String id;
+    private long id;
 
     @Column(nullable = false, unique = true)
     private String name;
+
     @Column(nullable = false)
     private String description;
+
     @Column(nullable = false)
     private String author;
 
     @Column(nullable = false)
     private boolean isActive;
 
-    @Column(columnDefinition="LONGVARCHAR")
-    @Convert(converter = AnalyticsMethodMetadataSetConverter.class)
-    Set<AnalyticsMethodMetadata> analyticsMethods;
-
     /**
      * Empty constructor
      */
     public AnalyticsGoal() {
-        this.id = "";
         this.name = "";
         this.author = "";
         this.description = "";
@@ -48,10 +50,11 @@ public class AnalyticsGoal {
 
     /**
      * Standard constructor
-     * @param name Name of the Analytics Goal
+     *
+     * @param name        Name of the Analytics Goal
      * @param description Description of the Analytics Goal
-     * @param author Author of the Analytics Goal
-     * @param isActive True if active, which enables relating Analytis Methods Metadata to it. False otherwise.
+     * @param author      Author of the Analytics Goal
+     * @param isActive    True if active, which enables relating Analytis Methods Metadata to it. False otherwise.
      */
     public AnalyticsGoal(String name, String description, String author, boolean isActive) {
         this.name = name;
@@ -64,14 +67,14 @@ public class AnalyticsGoal {
     /**
      * @return ID of the Analytics Goal
      */
-    public String getId() {
+    public long getId() {
         return id;
     }
 
     /**
      * @param id ID to be set
      */
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -147,6 +150,7 @@ public class AnalyticsGoal {
 
     /**
      * Update this object with the values from another Analytis Goal.
+     *
      * @param analyticsGoal containing the data to be updated.
      */
     public void updateWithAnalyticsGoal(AnalyticsGoal analyticsGoal) {
@@ -158,6 +162,7 @@ public class AnalyticsGoal {
 
     /**
      * Attempts to return a JSON representation of the object, defaults to a string representation otherwise.
+     *
      * @return A JSON text representation of the object.
      */
     @Override
@@ -184,8 +189,9 @@ public class AnalyticsGoal {
 
         AnalyticsGoal that = (AnalyticsGoal) o;
 
+        if (getId() != that.getId()) return false;
         if (isActive() != that.isActive()) return false;
-        if (!getId().equals(that.getId())) return false;
+        //if (!getId().equals(that.getId())) return false;
         if (!getName().equals(that.getName())) return false;
         if (!getDescription().equals(that.getDescription())) return false;
         return getAuthor().equals(that.getAuthor());
@@ -194,7 +200,8 @@ public class AnalyticsGoal {
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
+        //int result = getId().hashCode();
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + getName().hashCode();
         result = 31 * result + getDescription().hashCode();
         result = 31 * result + getAuthor().hashCode();

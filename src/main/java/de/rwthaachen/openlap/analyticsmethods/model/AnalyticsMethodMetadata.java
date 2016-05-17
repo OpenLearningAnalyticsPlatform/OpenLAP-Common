@@ -15,24 +15,24 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="AnalyticsMethodMetadata")
-public class AnalyticsMethodMetadata implements Cloneable{
+@Table(name = "AnalyticsMethodMetadata")
+public class AnalyticsMethodMetadata implements Cloneable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "METHODMETADATA_ID")
-    String id;
-    @Column(unique=true, nullable=false)
+    long id;
+    @Column(unique = true, nullable = false)
     String name;
     @Column(nullable = false)
     String creator;
     @Column(nullable = false)
     String description;
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     String implementingClass;
     @Column(nullable = false)
     String binariesLocation;
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     String filename;
 
     /**
@@ -49,11 +49,12 @@ public class AnalyticsMethodMetadata implements Cloneable{
 
     /**
      * Standard constructor
-     * @param name Name of the Analytics Method
-     * @param creator Creator of te Analytics Method
-     * @param description Short description of the Analytisc Method
+     *
+     * @param name              Name of the Analytics Method
+     * @param creator           Creator of te Analytics Method
+     * @param description       Short description of the Analytisc Method
      * @param implementingClass Class that implements the OpenLAP-AnalyticsFramework
-     * @param binariesLocation Path of the server where the JAR files of the Analytics Method are located.
+     * @param binariesLocation  Path of the server where the JAR files of the Analytics Method are located.
      */
     public AnalyticsMethodMetadata(String name, String creator, String description,
                                    String implementingClass, String binariesLocation) {
@@ -66,9 +67,10 @@ public class AnalyticsMethodMetadata implements Cloneable{
 
     /**
      * Standard constructor
-     * @param name Name of the Analytics Method
-     * @param creator Creator of te Analytics Method
-     * @param description Short description of the Analytisc Method
+     *
+     * @param name             Name of the Analytics Method
+     * @param creator          Creator of te Analytics Method
+     * @param description      Short description of the Analytisc Method
      * @param binariesLocation Path of the server where the JAR files of the Analytics Method are located.
      */
     public AnalyticsMethodMetadata(String name, String creator, String description, String binariesLocation) {
@@ -81,14 +83,14 @@ public class AnalyticsMethodMetadata implements Cloneable{
     /**
      * @return ID of the Analytics Method Metadata
      */
-    public String getId() {
+    public long getId() {
         return id;
     }
 
     /**
      * @param id ID to be set
      */
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -189,6 +191,7 @@ public class AnalyticsMethodMetadata implements Cloneable{
 
     /**
      * Cloning Method for the AnalyticsMethod Metadata.
+     *
      * @return An Object with the properties of this AnalyticsMethodMetadata
      * @throws CloneNotSupportedException
      */
@@ -198,7 +201,8 @@ public class AnalyticsMethodMetadata implements Cloneable{
 
     /**
      * Use another AnalyticsMethodMetadata to update this object
-     * @param updatedMetadata
+     *
+     * @param updatedMetadata updated metadata about the analytics method
      */
     public void updateWithMetadata(AnalyticsMethodMetadata updatedMetadata) {
         this.setCreator(updatedMetadata.getCreator());
@@ -214,7 +218,7 @@ public class AnalyticsMethodMetadata implements Cloneable{
 
         AnalyticsMethodMetadata that = (AnalyticsMethodMetadata) o;
 
-        if (!getId().equals(that.getId())) return false;
+        if (getId() != that.getId()) return false;
         if (!getName().equals(that.getName())) return false;
         if (!getCreator().equals(that.getCreator())) return false;
         if (!getDescription().equals(that.getDescription())) return false;
@@ -226,7 +230,7 @@ public class AnalyticsMethodMetadata implements Cloneable{
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + getName().hashCode();
         result = 31 * result + getCreator().hashCode();
         result = 31 * result + getDescription().hashCode();
