@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.github.OpenLearningAnalyticsPlatform</groupId>
             <artifactId>OpenLAP-Dataset</artifactId>
-            <version>v1.2-alpha</version>
+            <version>v1.3</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
