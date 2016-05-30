@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.OpenLearningAnalyticsPlatform</groupId>
-            <artifactId>OpenLAP-Dataset</artifactId>
+            <artifactId>OpenLAP-DataSet</artifactId>
             <version>v1.3</version>
         </dependency>
         <dependency>
