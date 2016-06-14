@@ -7,7 +7,7 @@ package de.rwthaachen.openlap.analyticsmodules.model;
  */
 public class IndicatorReference {
     long id;
-    String shortName;
+    //String shortName;
     String indicatorName;
 
     /**
@@ -23,9 +23,21 @@ public class IndicatorReference {
      * @param shortName     Short Name of the Indicator
      * @param indicatorName Name of the Indicator
      */
-    public IndicatorReference(long id, String shortName, String indicatorName) {
+    /*public IndicatorReference(long id, String shortName, String indicatorName) {
         this.id = id;
         this.shortName = shortName;
+        this.indicatorName = indicatorName;
+    }*/
+
+    /**
+     *
+     * Standard Constructor
+     *
+     * @param id                ID of the Indicator
+     * @param indicatorName     Name of the Indicator
+     */
+    public IndicatorReference(long id, String indicatorName) {
+        this.id = id;
         this.indicatorName = indicatorName;
     }
 
@@ -44,17 +56,31 @@ public class IndicatorReference {
     }
 
     /**
+     * @return Name of the indicator
+     */
+    public String getIndicatorName() {
+        return indicatorName;
+    }
+
+    /**
+     * @param indicatorName Name of the indicator
+     */
+    public void setIndicatorName(String indicatorName) {
+        this.indicatorName = indicatorName;
+    }
+
+    /**
      * @return Short Name of the IndicatorReference
      */
-    public String getShortName() {
+    /*public String getShortName() {
         return shortName;
-    }
+    }*/
 
     /**
      * @param shortName Short Name to be Set
      */
-    public void setShortName(String shortName) {
+    /*public void setShortName(String shortName) {
         this.shortName = shortName;
-    }
+    }*/
 
 }

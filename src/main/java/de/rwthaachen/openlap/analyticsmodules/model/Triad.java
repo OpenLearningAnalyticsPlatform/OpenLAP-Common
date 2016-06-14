@@ -19,6 +19,9 @@ public class Triad {
     @GeneratedValue (strategy = GenerationType.AUTO)
     long id;
 
+    @Column(nullable = false)
+    long goalId;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     @Convert(converter = AnalyticsMethodMetadataConverter.class)
     AnalyticsMethodMetadata analyticsMethodReference;
@@ -61,12 +64,14 @@ public class Triad {
      *                                              Visualization of this Triad.
      */
     public Triad(long id,
+                 long goalId,
                  IndicatorReference indicatorReference,
                  AnalyticsMethodMetadata analyticsMethodReference,
                  VisualizerReference visualizationReference,
                  OLAPPortConfiguration indicatorToAnalyticsMethodMapping,
                  OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
         //this.id = id;
+        this.goalId = goalId;
         this.indicatorReference = indicatorReference;
         this.analyticsMethodReference = analyticsMethodReference;
         this.visualizationReference = visualizationReference;
@@ -98,6 +103,50 @@ public class Triad {
         this.visualizationReference = visualizationReference;
         this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+    }
+
+    /**
+     * Standard constructor
+     *
+     * @param indicatorReference                    An Indicator Reference that corresponds to an Indicator of the Indicator Engine
+     *                                              macro component of the OpenLAP.
+     * @param analyticsMethodReference              An Analytics Method Reference that corresponds to an Analytics Method metadata of
+     *                                              the Analytics Methods macro component of the OpenLAP.
+     * @param visualizationReference                A Visualization Reference that correponds to a Visualization technique of the
+     *                                              Visualizer macro component of the OpenLAP.
+     * @param indicatorToAnalyticsMethodMapping     The OLAPPortConfiguration between the Indicator and the Analytics Method
+     *                                              of this Triad.
+     * @param analyticsMethodToVisualizationMapping The OLAPPortConfiguration between the Analytics Method and the
+     *                                              Visualization of this Triad.
+     */
+    public Triad(long goalId,
+                 IndicatorReference indicatorReference,
+                 AnalyticsMethodMetadata analyticsMethodReference,
+                 VisualizerReference visualizationReference,
+                 OLAPPortConfiguration indicatorToAnalyticsMethodMapping,
+                 OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+        this.goalId = goalId;
+        this.indicatorReference = indicatorReference;
+        this.analyticsMethodReference = analyticsMethodReference;
+        this.visualizationReference = visualizationReference;
+        this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
+        this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+    }
+
+    /**
+     *
+     * @return The id of the Goal associated with this Traid
+     */
+    public long getGoalId() {
+        return goalId;
+    }
+
+    /**
+     *
+     * @param goalId Id of the Goal for this Triad
+     */
+    public void setGoalId(long goalId) {
+        this.goalId = goalId;
     }
 
     /**
@@ -193,11 +242,30 @@ public class Triad {
      * @param triad with the information to be used to update this object.
      */
     public void updateWithTriad(Triad triad) {
+        this.setGoalId(triad.getGoalId());
         this.setAnalyticsMethodReference(triad.getAnalyticsMethodReference());
         this.setIndicatorReference(triad.getIndicatorReference());
         this.setVisualizationReference(triad.getVisualizationReference());
         this.setAnalyticsMethodToVisualizationMapping(triad.getAnalyticsMethodToVisualizationMapping());
         this.setIndicatorToAnalyticsMethodMapping(triad.getIndicatorToAnalyticsMethodMapping());
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return "Triad{" +
+                    "id=" + id +
+                    ", goalId=" + goalId +
+                    ", analyticsMethodReference=" + analyticsMethodReference +
+                    ", indicatorReference=" + indicatorReference +
+                    ", visualizationReference=" + visualizationReference +
+                    ", indicatorToAnalyticsMethodMapping=" + indicatorToAnalyticsMethodMapping +
+                    ", analyticsMethodToVisualizationMapping=" + analyticsMethodToVisualizationMapping +
+                    '}';
+        }
     }
 
     /**
@@ -207,31 +275,14 @@ public class Triad {
      * @return A string representation of this Object.
      */
     @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            return "Triad{" +
-                    "id='" + id + '\'' +
-                    ", analyticsMethodReference='" + analyticsMethodReference + '\'' +
-                    ", indicatorReference='" + indicatorReference + '\'' +
-                    ", visualizationReference='" + visualizationReference + '\'' +
-                    ", indicatorToAnalyticsMethodMapping='" + indicatorToAnalyticsMethodMapping + '\'' +
-                    ", analyticsMethodToVisualizationMapping='" + analyticsMethodToVisualizationMapping + '\'' +
-                    '}';
-        }
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Triad)) return false;
 
         Triad triad = (Triad) o;
 
-        //if (!id.equals(triad.id)) return false;
-        if (id != triad.id) return false;
+        if (getId() != triad.getId()) return false;
+        if (getGoalId() != triad.getGoalId()) return false;
         if (!analyticsMethodReference.equals(triad.analyticsMethodReference)) return false;
         if (!indicatorReference.equals(triad.indicatorReference)) return false;
         if (!getVisualizationReference().equals(triad.getVisualizationReference())) return false;
@@ -242,13 +293,12 @@ public class Triad {
         return !(getAnalyticsMethodToVisualizationMapping() != null ?
                 !getAnalyticsMethodToVisualizationMapping().equals(triad.getAnalyticsMethodToVisualizationMapping())
                 : triad.getAnalyticsMethodToVisualizationMapping() != null);
-
     }
 
     @Override
     public int hashCode() {
-        //int result = id.hashCode();
-        int result = (int) (id ^ (id >>> 32));
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + (int) (getGoalId() ^ (getGoalId() >>> 32));
         result = 31 * result + analyticsMethodReference.hashCode();
         result = 31 * result + indicatorReference.hashCode();
         result = 31 * result + getVisualizationReference().hashCode();
