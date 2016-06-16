@@ -10,8 +10,19 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestionSaveRequest {
+    /**
+     * Name of the question
+     */
     private String question;
+
+    /**
+     * Id of the associated goal
+     */
     private long goalID;
+
+    /**
+     * List of all the indicators associated with this question
+     */
     private List<IndicatorSaveRequest> indicators;
 
     public String getQuestion() {

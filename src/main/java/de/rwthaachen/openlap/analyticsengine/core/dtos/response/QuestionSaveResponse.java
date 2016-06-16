@@ -12,6 +12,7 @@ import java.util.List;
 public class QuestionSaveResponse {
     private boolean isQuestionSaved;
     private String errorMessage;
+    private String questionRequestCode;
 
     private List<IndicatorSaveResponse> indicatorSaveResponses;
 
@@ -29,6 +30,14 @@ public class QuestionSaveResponse {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getQuestionRequestCode() {
+        return questionRequestCode;
+    }
+
+    public void setQuestionRequestCode(String questionRequestCode) {
+        this.questionRequestCode = questionRequestCode;
     }
 
     public List<IndicatorSaveResponse> getIndicatorSaveResponses() {
