@@ -13,6 +13,7 @@ public class QuestionResponse {
     private long goalID;
     private int indicatorCount;
 
+
     public String getQuestion() {
         return question;
     }
