@@ -22,7 +22,6 @@ public class IndicatorResponse {
     private boolean isComposite;
     private String createdBy;
 
-
     public long getId() {
         return id;
     }
