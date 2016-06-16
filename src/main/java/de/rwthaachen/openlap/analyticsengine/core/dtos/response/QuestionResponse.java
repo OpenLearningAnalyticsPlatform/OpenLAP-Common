@@ -13,6 +13,15 @@ public class QuestionResponse {
     private long goalID;
     private int indicatorCount;
 
+    public QuestionResponse() {
+    }
+
+    public QuestionResponse(String question, long goalID, int indicatorCount) {
+        this.question = question;
+        this.goalID = goalID;
+        this.indicatorCount = indicatorCount;
+    }
+
     public String getQuestion() {
         return question;
     }

@@ -22,6 +22,28 @@ public class IndicatorResponse {
     private boolean isComposite;
     private String createdBy;
 
+    public IndicatorResponse() {
+    }
+
+    public IndicatorResponse(long id, String query, IndicatorReference indicatorReference,
+                             AnalyticsMethodMetadata analyticsMethodReference,
+                             VisualizerReference visualizationReference,
+                             OLAPPortConfiguration queryToMethodConfig,
+                             OLAPPortConfiguration methodToVisualizationConfig,
+                             String name, String parameters, boolean isComposite, String createdBy) {
+        this.id = id;
+        this.query = query;
+        this.indicatorReference = indicatorReference;
+        this.analyticsMethodReference = analyticsMethodReference;
+        this.visualizationReference = visualizationReference;
+        this.queryToMethodConfig = queryToMethodConfig;
+        this.methodToVisualizationConfig = methodToVisualizationConfig;
+        this.name = name;
+        this.parameters = parameters;
+        this.isComposite = isComposite;
+        this.createdBy = createdBy;
+    }
+
     public long getId() {
         return id;
     }
