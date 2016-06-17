@@ -9,33 +9,33 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestionResponse {
 
-    private String question;
-    private long goalID;
+    private long id;
+    private String name;
     private int indicatorCount;
 
     public QuestionResponse() {
     }
 
-    public QuestionResponse(String question, long goalID, int indicatorCount) {
-        this.question = question;
-        this.goalID = goalID;
+    public QuestionResponse(long id, String name, int indicatorCount) {
+        this.name = name;
+        this.id = id;
         this.indicatorCount = indicatorCount;
     }
 
-    public String getQuestion() {
-        return question;
+    public long getId() {
+        return id;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public long getGoalID() {
-        return goalID;
+    public String getName() {
+        return name;
     }
 
-    public void setGoalID(long goalID) {
-        this.goalID = goalID;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getIndicatorCount() {
