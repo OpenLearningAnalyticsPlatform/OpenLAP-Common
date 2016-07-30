@@ -3,6 +3,8 @@ package de.rwthaachen.openlap.analyticsengine.core.dtos.request;
 import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Map;
+
 /**
  * Created by Arham Muslim
  * on 06-May-16.
@@ -15,6 +17,7 @@ public class IndicatorPreviewRequest {
     private long visualizationMethodId;
     private OLAPPortConfiguration queryToMethodConfig;
     private OLAPPortConfiguration methodToVisualizationConfig;
+    private Map<String, Object> additionalParams;
 
     public String getQuery() {
         return query;
@@ -62,5 +65,13 @@ public class IndicatorPreviewRequest {
 
     public void setMethodToVisualizationConfig(OLAPPortConfiguration methodToVisualizationConfig) {
         this.methodToVisualizationConfig = methodToVisualizationConfig;
+    }
+
+    public Map<String, Object> getAdditionalParams() {
+        return additionalParams;
+    }
+
+    public void setAdditionalParams(Map<String, Object> additionalParams) {
+        this.additionalParams = additionalParams;
     }
 }
