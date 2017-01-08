@@ -20,11 +20,6 @@ public class IndicatorSaveRequest extends IndicatorPreviewRequest {
     private String parameters;
 
     /**
-     * Is indicators of composite type
-     */
-    private boolean isComposite;
-
-    /**
      * Name of the person who created the indicators
      */
     private String createdBy;
@@ -62,14 +57,6 @@ public class IndicatorSaveRequest extends IndicatorPreviewRequest {
 
     public void setParameters(String parameters) {
         this.parameters = parameters;
-    }
-
-    public boolean isComposite() {
-        return isComposite;
-    }
-
-    public void setComposite(boolean composite) {
-        isComposite = composite;
     }
 
     public String getCreatedBy() {

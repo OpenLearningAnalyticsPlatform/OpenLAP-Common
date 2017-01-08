@@ -21,7 +21,7 @@ public class AnalyticsGoal {
     Set<AnalyticsMethodMetadata> analyticsMethods;
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "LGOAL_ID")
     private long id;
 

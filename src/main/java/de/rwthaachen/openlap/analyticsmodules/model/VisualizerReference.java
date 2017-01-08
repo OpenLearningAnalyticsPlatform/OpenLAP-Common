@@ -1,5 +1,8 @@
 package de.rwthaachen.openlap.analyticsmodules.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * This class represents a reference to a particular Visualizer technique of a Visualizing Library of the Visualizer
  * macro component of the OpenLAP. It is modeled after the corresponding Class on the Visualization
@@ -108,5 +111,20 @@ public class VisualizerReference {
      */
     public void setMethodName(String methodName) {
         this.methodName = methodName;
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return "VisualizerReference{" +
+                    "frameworkId=" + frameworkId +
+                    ", methodId=" + methodId +
+                    ", frameworkName='" + frameworkName + '\'' +
+                    ", methodName='" + methodName + '\'' +
+                    '}';
+        }
     }
 }

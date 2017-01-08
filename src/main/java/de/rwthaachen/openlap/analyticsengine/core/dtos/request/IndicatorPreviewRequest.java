@@ -3,6 +3,7 @@ package de.rwthaachen.openlap.analyticsengine.core.dtos.request;
 import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,27 +12,37 @@ import java.util.Map;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IndicatorPreviewRequest {
-    private String query;
-    private long analyticsMethodId;
+
+    private Map<String, String> query;
+    private Map<String, Long> analyticsMethodId;
     private long visualizationFrameworkId;
     private long visualizationMethodId;
-    private OLAPPortConfiguration queryToMethodConfig;
+    private Map<String, OLAPPortConfiguration> queryToMethodConfig;
     private OLAPPortConfiguration methodToVisualizationConfig;
+    private Map<String, String> methodInputParams;
+    private Map<String, String> visualizationInputParams;
     private Map<String, Object> additionalParams;
+    private boolean isComposite;
 
-    public String getQuery() {
+    public IndicatorPreviewRequest(){
+        query = new HashMap<String, String>();
+        analyticsMethodId = new HashMap<String, Long>();
+        queryToMethodConfig = new HashMap<String, OLAPPortConfiguration>();
+    }
+
+    public Map<String, String> getQuery() {
         return query;
     }
 
-    public void setQuery(String query) {
+    public void setQuery(Map<String, String> query) {
         this.query = query;
     }
 
-    public long getAnalyticsMethodId() {
+    public Map<String, Long> getAnalyticsMethodId() {
         return analyticsMethodId;
     }
 
-    public void setAnalyticsMethodId(long analyticsMethodId) {
+    public void setAnalyticsMethodId(Map<String, Long> analyticsMethodId) {
         this.analyticsMethodId = analyticsMethodId;
     }
 
@@ -51,11 +62,11 @@ public class IndicatorPreviewRequest {
         this.visualizationMethodId = visualizationMethodId;
     }
 
-    public OLAPPortConfiguration getQueryToMethodConfig() {
+    public Map<String, OLAPPortConfiguration> getQueryToMethodConfig() {
         return queryToMethodConfig;
     }
 
-    public void setQueryToMethodConfig(OLAPPortConfiguration queryToMethodConfig) {
+    public void setQueryToMethodConfig(Map<String, OLAPPortConfiguration> queryToMethodConfig) {
         this.queryToMethodConfig = queryToMethodConfig;
     }
 
@@ -73,5 +84,29 @@ public class IndicatorPreviewRequest {
 
     public void setAdditionalParams(Map<String, Object> additionalParams) {
         this.additionalParams = additionalParams;
+    }
+
+    public boolean isComposite() {
+        return isComposite;
+    }
+
+    public void setComposite(boolean composite) {
+        isComposite = composite;
+    }
+
+    public Map<String, String> getMethodInputParams() {
+        return methodInputParams;
+    }
+
+    public void setMethodInputParams(Map<String, String> methodInputParams) {
+        this.methodInputParams = methodInputParams;
+    }
+
+    public Map<String, String> getVisualizationInputParams() {
+        return visualizationInputParams;
+    }
+
+    public void setVisualizationInputParams(Map<String, String> visualizationInputParams) {
+        this.visualizationInputParams = visualizationInputParams;
     }
 }

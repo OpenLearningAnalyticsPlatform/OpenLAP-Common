@@ -1,11 +1,15 @@
 package de.rwthaachen.openlap.analyticsmodules.model;
 
 import DataSet.OLAPPortConfiguration;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.rwthaachen.openlap.analyticsmethods.model.AnalyticsMethodMetadata;
+import de.rwthaachen.openlap.analyticsengine.model.Question;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Triad is used to save the Indicator/Method/Visualization along with the particular configuration between the
@@ -17,30 +21,54 @@ public class Triad {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
+    @Column(name = "triad_id")
     long id;
 
     @Column(nullable = false)
     long goalId;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    @Convert(converter = AnalyticsMethodMetadataConverter.class)
-    AnalyticsMethodMetadata analyticsMethodReference;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
     @Convert(converter = IndicatorReferenceConverter.class)
     IndicatorReference indicatorReference;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    @Convert(converter = AnalyticsMethodReferenceConverter.class)
+    AnalyticsMethodReference analyticsMethodReference;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     @Convert(converter = VisualizerReferenceConverter.class)
     VisualizerReference visualizationReference;
 
+//    @Column(columnDefinition = "TEXT")
+//    @Convert(converter = OLAPPortConfigurationConverter.class)
+//    OLAPPortConfiguration indicatorToAnalyticsMethodMapping;
+
     @Column(columnDefinition = "TEXT")
-    @Convert(converter = OLAPPortConfigurationConverter.class)
-    OLAPPortConfiguration indicatorToAnalyticsMethodMapping;
+    @Convert(converter = OpenLAPPortConfigReferenceConverter.class)
+    OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping;
 
     @Column(columnDefinition = "TEXT")
     @Convert(converter = OLAPPortConfigurationConverter.class)
     OLAPPortConfiguration analyticsMethodToVisualizationMapping;
+
+    @ManyToMany(mappedBy = "triads", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Question> questions = new HashSet<Question>();
+
+    @Column(columnDefinition = "TEXT")
+    private String parameters;
+
+    @Column(nullable = false)
+    private String createdBy;
+
+    @Column(nullable = false)
+    private Timestamp createdOn;
+
+    @Column(nullable = false)
+    private Timestamp lastExecutedOn;
+
+    @Column(nullable = false)
+    private int timesExecuted;
 
     /**
      * Empty constructor
@@ -66,9 +94,9 @@ public class Triad {
     public Triad(long id,
                  long goalId,
                  IndicatorReference indicatorReference,
-                 AnalyticsMethodMetadata analyticsMethodReference,
+                 AnalyticsMethodReference analyticsMethodReference,
                  VisualizerReference visualizationReference,
-                 OLAPPortConfiguration indicatorToAnalyticsMethodMapping,
+                 OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
                  OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
         //this.id = id;
         this.goalId = goalId;
@@ -77,6 +105,11 @@ public class Triad {
         this.visualizationReference = visualizationReference;
         this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+        this.parameters = "[]";
+        this.createdBy = "";
+        this.createdOn = new Timestamp(System.currentTimeMillis());
+        this.lastExecutedOn = new Timestamp(System.currentTimeMillis());
+        this.timesExecuted = 0;
     }
 
     /**
@@ -94,15 +127,20 @@ public class Triad {
      *                                              Visualization of this Triad.
      */
     public Triad(IndicatorReference indicatorReference,
-                 AnalyticsMethodMetadata analyticsMethodReference,
+                 AnalyticsMethodReference analyticsMethodReference,
                  VisualizerReference visualizationReference,
-                 OLAPPortConfiguration indicatorToAnalyticsMethodMapping,
+                 OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
                  OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
         this.indicatorReference = indicatorReference;
         this.analyticsMethodReference = analyticsMethodReference;
         this.visualizationReference = visualizationReference;
         this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+        this.parameters = "[]";
+        this.createdBy = "";
+        this.createdOn = new Timestamp(System.currentTimeMillis());
+        this.lastExecutedOn = new Timestamp(System.currentTimeMillis());
+        this.timesExecuted = 0;
     }
 
     /**
@@ -121,9 +159,9 @@ public class Triad {
      */
     public Triad(long goalId,
                  IndicatorReference indicatorReference,
-                 AnalyticsMethodMetadata analyticsMethodReference,
+                 AnalyticsMethodReference analyticsMethodReference,
                  VisualizerReference visualizationReference,
-                 OLAPPortConfiguration indicatorToAnalyticsMethodMapping,
+                 OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
                  OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
         this.goalId = goalId;
         this.indicatorReference = indicatorReference;
@@ -131,109 +169,134 @@ public class Triad {
         this.visualizationReference = visualizationReference;
         this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+        this.parameters = "[]";
+        this.createdBy = "";
+        this.createdOn = new Timestamp(System.currentTimeMillis());
+        this.lastExecutedOn = new Timestamp(System.currentTimeMillis());
+        this.timesExecuted = 0;
     }
 
-    /**
-     *
-     * @return The id of the Goal associated with this Traid
-     */
-    public long getGoalId() {
-        return goalId;
-    }
-
-    /**
-     *
-     * @param goalId Id of the Goal for this Triad
-     */
-    public void setGoalId(long goalId) {
+    public Triad(long goalId, AnalyticsMethodReference analyticsMethodReference, IndicatorReference indicatorReference,
+                 VisualizerReference visualizationReference, OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
+                 OLAPPortConfiguration analyticsMethodToVisualizationMapping, Set<Question> questions,
+                 String parameters, String createdBy, Timestamp createdOn, Timestamp lastExecutedOn,
+                 int timesExecuted) {
         this.goalId = goalId;
-    }
-
-    /**
-     * @return The VisualizerReference of this Triad.
-     */
-    public VisualizerReference getVisualizationReference() {
-        return visualizationReference;
-    }
-
-    /**
-     * @param visualizationReference The VisualizerReference to set in this Triad.
-     */
-    public void setVisualizationReference(VisualizerReference visualizationReference) {
+        this.analyticsMethodReference = analyticsMethodReference;
+        this.indicatorReference = indicatorReference;
         this.visualizationReference = visualizationReference;
-    }
-
-    /**
-     * @return The OLAPPortConfiguration between the Indicator and the Analytics Method of this Triad.
-     */
-    public OLAPPortConfiguration getIndicatorToAnalyticsMethodMapping() {
-        return indicatorToAnalyticsMethodMapping;
-    }
-
-    /**
-     * @param indicatorToAnalyticsMethodMapping The OLAPPortConfiguration to set between the the Indicator and the
-     *                                          Analytics Method of this Triad.
-     */
-    public void setIndicatorToAnalyticsMethodMapping(OLAPPortConfiguration indicatorToAnalyticsMethodMapping) {
         this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
-    }
-
-    /**
-     * @return The OLAPPortConfiguration between the Analytics Method and the Visualization of this Triad.
-     */
-    public OLAPPortConfiguration getAnalyticsMethodToVisualizationMapping() {
-        return analyticsMethodToVisualizationMapping;
-    }
-
-    /**
-     * @param analyticsMethodToVisualizationMapping The OLAPPortConfiguration to set between the the Analytics Method
-     *                                              and the Visualization of this Triad.
-     */
-    public void setAnalyticsMethodToVisualizationMapping(OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+        this.questions = questions;
+        this.parameters = parameters;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.lastExecutedOn = lastExecutedOn;
+        this.timesExecuted = timesExecuted;
     }
 
-    /**
-     * @return ID of this Triad.
-     */
     public long getId() {
         return id;
     }
 
-    /**
-     * @param id The ID to be set.
-     */
     public void setId(long id) {
         this.id = id;
     }
 
-    /**
-     * @return The AnalyticsMethodMetadata reference to the Analytis Method of this Triad.
-     */
-    public AnalyticsMethodMetadata getAnalyticsMethodReference() {
-        return analyticsMethodReference;
+    public long getGoalId() {
+        return goalId;
     }
 
-    /**
-     * @param analyticsMethodReference The AnalyticsMethodMetadata to be set as the Analytics Method referene of this
-     *                                 Triad.
-     */
-    public void setAnalyticsMethodReference(AnalyticsMethodMetadata analyticsMethodReference) {
-        this.analyticsMethodReference = analyticsMethodReference;
+    public void setGoalId(long goalId) {
+        this.goalId = goalId;
     }
 
-    /**
-     * @return The IndicatorReference of this Triad.
-     */
     public IndicatorReference getIndicatorReference() {
         return indicatorReference;
     }
 
-    /**
-     * @param indicatorReference The IndicatorReference to be set in this Triad.
-     */
     public void setIndicatorReference(IndicatorReference indicatorReference) {
         this.indicatorReference = indicatorReference;
+    }
+
+    public AnalyticsMethodReference getAnalyticsMethodReference() {
+        return analyticsMethodReference;
+    }
+
+    public void setAnalyticsMethodReference(AnalyticsMethodReference analyticsMethodReference) {
+        this.analyticsMethodReference = analyticsMethodReference;
+    }
+
+    public VisualizerReference getVisualizationReference() {
+        return visualizationReference;
+    }
+
+    public void setVisualizationReference(VisualizerReference visualizationReference) {
+        this.visualizationReference = visualizationReference;
+    }
+
+    public OpenLAPPortConfigReference getIndicatorToAnalyticsMethodMapping() {
+        return indicatorToAnalyticsMethodMapping;
+    }
+
+    public void setIndicatorToAnalyticsMethodMapping(OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping) {
+        this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
+    }
+
+    public OLAPPortConfiguration getAnalyticsMethodToVisualizationMapping() {
+        return analyticsMethodToVisualizationMapping;
+    }
+
+    public void setAnalyticsMethodToVisualizationMapping(OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+        this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
+    }
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
+
+    public String getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(String parameters) {
+        this.parameters = parameters;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Timestamp getLastExecutedOn() {
+        return lastExecutedOn;
+    }
+
+    public void setLastExecutedOn(Timestamp lastExecutedOn) {
+        this.lastExecutedOn = lastExecutedOn;
+    }
+
+    public int getTimesExecuted() {
+        return timesExecuted;
+    }
+
+    public void setTimesExecuted(int timesExecuted) {
+        this.timesExecuted = timesExecuted;
     }
 
     /**
@@ -264,6 +327,12 @@ public class Triad {
                     ", visualizationReference=" + visualizationReference +
                     ", indicatorToAnalyticsMethodMapping=" + indicatorToAnalyticsMethodMapping +
                     ", analyticsMethodToVisualizationMapping=" + analyticsMethodToVisualizationMapping +
+                    ", questions=" + questions +
+                    ", parameters='" + parameters + '\'' +
+                    ", createdBy='" + createdBy + '\'' +
+                    ", createdOn=" + createdOn +
+                    ", lastExecutedOn=" + lastExecutedOn +
+                    ", timesExecuted=" + timesExecuted +
                     '}';
         }
     }

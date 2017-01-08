@@ -2,6 +2,8 @@ package de.rwthaachen.openlap.analyticsengine.core.dtos.response;
 
 import DataSet.OLAPPortConfiguration;
 import de.rwthaachen.openlap.analyticsmethods.model.AnalyticsMethodMetadata;
+import de.rwthaachen.openlap.analyticsmodules.model.AnalyticsMethodEntry;
+import de.rwthaachen.openlap.analyticsmodules.model.AnalyticsMethodReference;
 import de.rwthaachen.openlap.analyticsmodules.model.IndicatorReference;
 import de.rwthaachen.openlap.analyticsmodules.model.VisualizerReference;
 
@@ -13,7 +15,7 @@ public class IndicatorResponse {
     private long id;
     private String query;
     private IndicatorReference indicatorReference;
-    private AnalyticsMethodMetadata analyticsMethodReference;
+    private AnalyticsMethodEntry analyticsMethodReference;
     private VisualizerReference visualizationReference;
     private OLAPPortConfiguration queryToMethodConfig;
     private OLAPPortConfiguration methodToVisualizationConfig;
@@ -26,7 +28,7 @@ public class IndicatorResponse {
     }
 
     public IndicatorResponse(long id, String query, IndicatorReference indicatorReference,
-                             AnalyticsMethodMetadata analyticsMethodReference,
+                             AnalyticsMethodEntry analyticsMethodReference,
                              VisualizerReference visualizationReference,
                              OLAPPortConfiguration queryToMethodConfig,
                              OLAPPortConfiguration methodToVisualizationConfig,
@@ -68,11 +70,11 @@ public class IndicatorResponse {
         this.indicatorReference = indicatorReference;
     }
 
-    public AnalyticsMethodMetadata getAnalyticsMethodReference() {
+    public AnalyticsMethodEntry getAnalyticsMethodReference() {
         return analyticsMethodReference;
     }
 
-    public void setAnalyticsMethodReference(AnalyticsMethodMetadata analyticsMethodReference) {
+    public void setAnalyticsMethodReference(AnalyticsMethodEntry analyticsMethodReference) {
         this.analyticsMethodReference = analyticsMethodReference;
     }
 

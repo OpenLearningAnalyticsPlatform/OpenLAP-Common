@@ -1,5 +1,6 @@
 package de.rwthaachen.openlap.analyticsmodules.model;
 
+import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,24 +12,24 @@ import java.util.Map;
  * OpenLAP.It is modeled after the corresponding Class on the Indicator Engine and holds metadata necessary to reference
  * on a Triad
  */
-public class IndicatorReference {
+public class OpenLAPPortConfigReference {
 //    long id;
 //    String indicatorName;
 
     //HashMap to store the id and the name of the indicators related to the triad
-    Map<String, IndicatorEntry> indicators;
+    Map<String, OLAPPortConfiguration> portConfigs;
 
 
-    public IndicatorReference() {
-        indicators = new HashMap<String, IndicatorEntry>();
+    public OpenLAPPortConfigReference() {
+        portConfigs = new HashMap<String, OLAPPortConfiguration>();
     }
 
-    public Map<String, IndicatorEntry> getIndicators() {
-        return indicators;
+    public Map<String, OLAPPortConfiguration> getPortConfigs() {
+        return portConfigs;
     }
 
-    public void setIndicators(Map<String, IndicatorEntry> indicators) {
-        this.indicators = indicators;
+    public void setPortConfigs(Map<String, OLAPPortConfiguration> portConfigs) {
+        this.portConfigs = portConfigs;
     }
 
     @Override
@@ -37,8 +38,8 @@ public class IndicatorReference {
         try {
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            return "IndicatorReference{" +
-                    "indicators=" + indicators +
+            return "OpenLAPPortConfigReference{" +
+                    "portConfigs=" + portConfigs +
                     '}';
         }
     }
