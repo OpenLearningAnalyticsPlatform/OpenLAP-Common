@@ -2,6 +2,9 @@ package de.rwthaachen.openlap.analyticsengine.core.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Arham Muslim
  * on 09-Jun-16.
@@ -33,7 +36,12 @@ public class IndicatorSaveRequest extends IndicatorPreviewRequest {
     /**
      * If an existing indicators is loaded and updated than the id of the indicator will be set here.
      */
-    private long serverID;
+    //private long serverID;
+    private Map<String, Long> serverID;
+
+    public IndicatorSaveRequest(){
+        serverID = new HashMap<String, Long>();
+    }
 
     public int getIndicatorClientID() {
         return indicatorClientID;
@@ -67,11 +75,19 @@ public class IndicatorSaveRequest extends IndicatorPreviewRequest {
         this.createdBy = createdBy;
     }
 
-    public long getServerID() {
+//    public long getServerID() {
+//        return serverID;
+//    }
+//
+//    public void setServerID(long serverID) {
+//        this.serverID = serverID;
+//    }
+
+    public Map<String, Long> getServerID() {
         return serverID;
     }
 
-    public void setServerID(long serverID) {
+    public void setServerID(Map<String, Long> serverID) {
         this.serverID = serverID;
     }
 }
