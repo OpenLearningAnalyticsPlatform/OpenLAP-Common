@@ -1,12 +1,13 @@
 package de.rwthaachen.openlap.visualizer.core.dtos.request;
 
-import DataSet.OLAPDataSet;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.rwthaachen.openlap.dataset.OpenLAPDataSet;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddNewVisualizationSuggestionRequest {
     private Long visualizationMethodId;
-    private OLAPDataSet olapDataSet;
+    private OpenLAPDataSet openLAPDataSet;
 
     public Long getVisualizationMethodId() {
         return visualizationMethodId;
@@ -16,11 +17,11 @@ public class AddNewVisualizationSuggestionRequest {
         this.visualizationMethodId = visualizationMethodId;
     }
 
-    public OLAPDataSet getOlapDataSet() {
-        return olapDataSet;
+    public OpenLAPDataSet getOpenLAPDataSet() {
+        return openLAPDataSet;
     }
 
-    public void setOlapDataSet(OLAPDataSet olapDataSet) {
-        this.olapDataSet = olapDataSet;
+    public void setOpenLAPDataSet(OpenLAPDataSet openLAPDataSet) {
+        this.openLAPDataSet = openLAPDataSet;
     }
 }

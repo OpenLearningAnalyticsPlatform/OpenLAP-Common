@@ -1,11 +1,9 @@
 package de.rwthaachen.openlap.analyticsengine.core.dtos.response;
 
-import DataSet.OLAPPortConfiguration;
-import de.rwthaachen.openlap.analyticsmethods.model.AnalyticsMethodMetadata;
 import de.rwthaachen.openlap.analyticsmodules.model.AnalyticsMethodEntry;
-import de.rwthaachen.openlap.analyticsmodules.model.AnalyticsMethodReference;
 import de.rwthaachen.openlap.analyticsmodules.model.IndicatorReference;
 import de.rwthaachen.openlap.analyticsmodules.model.VisualizerReference;
+import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
 
 /**
  * Created by Arham Muslim
@@ -17,8 +15,8 @@ public class IndicatorResponse {
     private IndicatorReference indicatorReference;
     private AnalyticsMethodEntry analyticsMethodReference;
     private VisualizerReference visualizationReference;
-    private OLAPPortConfiguration queryToMethodConfig;
-    private OLAPPortConfiguration methodToVisualizationConfig;
+    private OpenLAPPortConfig queryToMethodConfig;
+    private OpenLAPPortConfig methodToVisualizationConfig;
     private String name;
     private String parameters;
     private boolean isComposite;
@@ -30,8 +28,8 @@ public class IndicatorResponse {
     public IndicatorResponse(long id, String query, IndicatorReference indicatorReference,
                              AnalyticsMethodEntry analyticsMethodReference,
                              VisualizerReference visualizationReference,
-                             OLAPPortConfiguration queryToMethodConfig,
-                             OLAPPortConfiguration methodToVisualizationConfig,
+                             OpenLAPPortConfig queryToMethodConfig,
+                             OpenLAPPortConfig methodToVisualizationConfig,
                              String name, String parameters, boolean isComposite, String createdBy) {
         this.id = id;
         this.query = query;
@@ -86,19 +84,19 @@ public class IndicatorResponse {
         this.visualizationReference = visualizationReference;
     }
 
-    public OLAPPortConfiguration getQueryToMethodConfig() {
+    public OpenLAPPortConfig getQueryToMethodConfig() {
         return queryToMethodConfig;
     }
 
-    public void setQueryToMethodConfig(OLAPPortConfiguration queryToMethodConfig) {
+    public void setQueryToMethodConfig(OpenLAPPortConfig queryToMethodConfig) {
         this.queryToMethodConfig = queryToMethodConfig;
     }
 
-    public OLAPPortConfiguration getMethodToVisualizationConfig() {
+    public OpenLAPPortConfig getMethodToVisualizationConfig() {
         return methodToVisualizationConfig;
     }
 
-    public void setMethodToVisualizationConfig(OLAPPortConfiguration methodToVisualizationConfig) {
+    public void setMethodToVisualizationConfig(OpenLAPPortConfig methodToVisualizationConfig) {
         this.methodToVisualizationConfig = methodToVisualizationConfig;
     }
 

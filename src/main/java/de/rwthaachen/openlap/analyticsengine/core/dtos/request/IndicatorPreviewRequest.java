@@ -1,7 +1,7 @@
 package de.rwthaachen.openlap.analyticsengine.core.dtos.request;
 
-import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +17,8 @@ public class IndicatorPreviewRequest {
     private Map<String, Long> analyticsMethodId;
     private long visualizationFrameworkId;
     private long visualizationMethodId;
-    private Map<String, OLAPPortConfiguration> queryToMethodConfig;
-    private OLAPPortConfiguration methodToVisualizationConfig;
+    private Map<String, OpenLAPPortConfig> queryToMethodConfig;
+    private OpenLAPPortConfig methodToVisualizationConfig;
     private Map<String, String> methodInputParams;
     private Map<String, String> visualizationInputParams;
     private Map<String, Object> additionalParams;
@@ -27,7 +27,7 @@ public class IndicatorPreviewRequest {
     public IndicatorPreviewRequest(){
         query = new HashMap<String, String>();
         analyticsMethodId = new HashMap<String, Long>();
-        queryToMethodConfig = new HashMap<String, OLAPPortConfiguration>();
+        queryToMethodConfig = new HashMap<String, OpenLAPPortConfig>();
     }
 
     public Map<String, String> getQuery() {
@@ -62,19 +62,19 @@ public class IndicatorPreviewRequest {
         this.visualizationMethodId = visualizationMethodId;
     }
 
-    public Map<String, OLAPPortConfiguration> getQueryToMethodConfig() {
+    public Map<String, OpenLAPPortConfig> getQueryToMethodConfig() {
         return queryToMethodConfig;
     }
 
-    public void setQueryToMethodConfig(Map<String, OLAPPortConfiguration> queryToMethodConfig) {
+    public void setQueryToMethodConfig(Map<String, OpenLAPPortConfig> queryToMethodConfig) {
         this.queryToMethodConfig = queryToMethodConfig;
     }
 
-    public OLAPPortConfiguration getMethodToVisualizationConfig() {
+    public OpenLAPPortConfig getMethodToVisualizationConfig() {
         return methodToVisualizationConfig;
     }
 
-    public void setMethodToVisualizationConfig(OLAPPortConfiguration methodToVisualizationConfig) {
+    public void setMethodToVisualizationConfig(OpenLAPPortConfig methodToVisualizationConfig) {
         this.methodToVisualizationConfig = methodToVisualizationConfig;
     }
 

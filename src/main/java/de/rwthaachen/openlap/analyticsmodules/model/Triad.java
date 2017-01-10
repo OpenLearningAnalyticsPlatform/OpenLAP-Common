@@ -1,10 +1,10 @@
 package de.rwthaachen.openlap.analyticsmodules.model;
 
-import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.rwthaachen.openlap.analyticsengine.model.Question;
+import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -40,16 +40,16 @@ public class Triad {
     VisualizerReference visualizationReference;
 
 //    @Column(columnDefinition = "TEXT")
-//    @Convert(converter = OLAPPortConfigurationConverter.class)
-//    OLAPPortConfiguration indicatorToAnalyticsMethodMapping;
+//    @Convert(converter = OpenLAPPortConfigConverter.class)
+//    OpenLAPPortConfig indicatorToAnalyticsMethodMapping;
 
     @Column(columnDefinition = "TEXT")
     @Convert(converter = OpenLAPPortConfigReferenceConverter.class)
     OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping;
 
     @Column(columnDefinition = "TEXT")
-    @Convert(converter = OLAPPortConfigurationConverter.class)
-    OLAPPortConfiguration analyticsMethodToVisualizationMapping;
+    @Convert(converter = OpenLAPPortConfigConverter.class)
+    OpenLAPPortConfig analyticsMethodToVisualizationMapping;
 
     @ManyToMany(mappedBy = "triads", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -86,9 +86,9 @@ public class Triad {
      *                                              the Analytics Methods macro component of the OpenLAP.
      * @param visualizationReference                A Visualization Reference that correponds to a Visualization technique of the
      *                                              Visualizer macro component of the OpenLAP.
-     * @param indicatorToAnalyticsMethodMapping     The OLAPPortConfiguration between the Indicator and the Analytics Method
+     * @param indicatorToAnalyticsMethodMapping     The OpenLAPPortConfig between the Indicator and the Analytics Method
      *                                              of this Triad.
-     * @param analyticsMethodToVisualizationMapping The OLAPPortConfiguration between the Analytics Method and the
+     * @param analyticsMethodToVisualizationMapping The OpenLAPPortConfig between the Analytics Method and the
      *                                              Visualization of this Triad.
      */
     public Triad(long id,
@@ -97,7 +97,7 @@ public class Triad {
                  AnalyticsMethodReference analyticsMethodReference,
                  VisualizerReference visualizationReference,
                  OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
-                 OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+                 OpenLAPPortConfig analyticsMethodToVisualizationMapping) {
         //this.id = id;
         this.goalId = goalId;
         this.indicatorReference = indicatorReference;
@@ -121,16 +121,16 @@ public class Triad {
      *                                              the Analytics Methods macro component of the OpenLAP.
      * @param visualizationReference                A Visualization Reference that correponds to a Visualization technique of the
      *                                              Visualizer macro component of the OpenLAP.
-     * @param indicatorToAnalyticsMethodMapping     The OLAPPortConfiguration between the Indicator and the Analytics Method
+     * @param indicatorToAnalyticsMethodMapping     The OpenLAPPortConfig between the Indicator and the Analytics Method
      *                                              of this Triad.
-     * @param analyticsMethodToVisualizationMapping The OLAPPortConfiguration between the Analytics Method and the
+     * @param analyticsMethodToVisualizationMapping The OpenLAPPortConfig between the Analytics Method and the
      *                                              Visualization of this Triad.
      */
     public Triad(IndicatorReference indicatorReference,
                  AnalyticsMethodReference analyticsMethodReference,
                  VisualizerReference visualizationReference,
                  OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
-                 OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+                 OpenLAPPortConfig analyticsMethodToVisualizationMapping) {
         this.indicatorReference = indicatorReference;
         this.analyticsMethodReference = analyticsMethodReference;
         this.visualizationReference = visualizationReference;
@@ -152,9 +152,9 @@ public class Triad {
      *                                              the Analytics Methods macro component of the OpenLAP.
      * @param visualizationReference                A Visualization Reference that correponds to a Visualization technique of the
      *                                              Visualizer macro component of the OpenLAP.
-     * @param indicatorToAnalyticsMethodMapping     The OLAPPortConfiguration between the Indicator and the Analytics Method
+     * @param indicatorToAnalyticsMethodMapping     The OpenLAPPortConfig between the Indicator and the Analytics Method
      *                                              of this Triad.
-     * @param analyticsMethodToVisualizationMapping The OLAPPortConfiguration between the Analytics Method and the
+     * @param analyticsMethodToVisualizationMapping The OpenLAPPortConfig between the Analytics Method and the
      *                                              Visualization of this Triad.
      */
     public Triad(long goalId,
@@ -162,7 +162,7 @@ public class Triad {
                  AnalyticsMethodReference analyticsMethodReference,
                  VisualizerReference visualizationReference,
                  OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
-                 OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+                 OpenLAPPortConfig analyticsMethodToVisualizationMapping) {
         this.goalId = goalId;
         this.indicatorReference = indicatorReference;
         this.analyticsMethodReference = analyticsMethodReference;
@@ -178,7 +178,7 @@ public class Triad {
 
     public Triad(long goalId, AnalyticsMethodReference analyticsMethodReference, IndicatorReference indicatorReference,
                  VisualizerReference visualizationReference, OpenLAPPortConfigReference indicatorToAnalyticsMethodMapping,
-                 OLAPPortConfiguration analyticsMethodToVisualizationMapping, Set<Question> questions,
+                 OpenLAPPortConfig analyticsMethodToVisualizationMapping, Set<Question> questions,
                  String parameters, String createdBy, Timestamp createdOn, Timestamp lastExecutedOn,
                  int timesExecuted) {
         this.goalId = goalId;
@@ -243,11 +243,11 @@ public class Triad {
         this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
     }
 
-    public OLAPPortConfiguration getAnalyticsMethodToVisualizationMapping() {
+    public OpenLAPPortConfig getAnalyticsMethodToVisualizationMapping() {
         return analyticsMethodToVisualizationMapping;
     }
 
-    public void setAnalyticsMethodToVisualizationMapping(OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+    public void setAnalyticsMethodToVisualizationMapping(OpenLAPPortConfig analyticsMethodToVisualizationMapping) {
         this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
     }
 

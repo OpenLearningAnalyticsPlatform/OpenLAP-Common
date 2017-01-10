@@ -1,6 +1,5 @@
 package de.rwthaachen.openlap.analyticsengine.core.dtos.response;
 
-import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -15,8 +14,8 @@ public class IndicatorPreviewResponse {
 //    private long analyticsMethodId;
 //    private long visualizationFrameworkId;
 //    private long visualizationMethodId;
-//    OLAPPortConfiguration indicatorToAnalyticsMethodMapping;
-//    OLAPPortConfiguration analyticsMethodToVisualizationMapping;
+//    OpenLAPPortConfig indicatorToAnalyticsMethodMapping;
+//    OpenLAPPortConfig analyticsMethodToVisualizationMapping;
     private boolean isSuccess;
     private String errorMessage;
 
@@ -60,19 +59,19 @@ public class IndicatorPreviewResponse {
 //        this.visualizationMethodId = visualizationMethodId;
 //    }
 //
-//    public OLAPPortConfiguration getIndicatorToAnalyticsMethodMapping() {
+//    public OpenLAPPortConfig getIndicatorToAnalyticsMethodMapping() {
 //        return indicatorToAnalyticsMethodMapping;
 //    }
 //
-//    public void setIndicatorToAnalyticsMethodMapping(OLAPPortConfiguration indicatorToAnalyticsMethodMapping) {
+//    public void setIndicatorToAnalyticsMethodMapping(OpenLAPPortConfig indicatorToAnalyticsMethodMapping) {
 //        this.indicatorToAnalyticsMethodMapping = indicatorToAnalyticsMethodMapping;
 //    }
 //
-//    public OLAPPortConfiguration getAnalyticsMethodToVisualizationMapping() {
+//    public OpenLAPPortConfig getAnalyticsMethodToVisualizationMapping() {
 //        return analyticsMethodToVisualizationMapping;
 //    }
 //
-//    public void setAnalyticsMethodToVisualizationMapping(OLAPPortConfiguration analyticsMethodToVisualizationMapping) {
+//    public void setAnalyticsMethodToVisualizationMapping(OpenLAPPortConfig analyticsMethodToVisualizationMapping) {
 //        this.analyticsMethodToVisualizationMapping = analyticsMethodToVisualizationMapping;
 //    }
 

@@ -21,15 +21,15 @@ public class VisualizationSuggestion {
     @JoinColumn(name = "VIS_METHOD_FID")
     private VisualizationMethod visualizationMethod;
     @Column(name = "INPUT_COLUMN_CONFIG")
-    private String olapDataSetConfiguration;
+    private String OpenLAPDataSetConfiguration;
 
     public VisualizationSuggestion(){
 
     }
 
-    public VisualizationSuggestion(VisualizationMethod visMethod, String olapDataSetConfiguration){
+    public VisualizationSuggestion(VisualizationMethod visMethod, String OpenLAPDataSetConfiguration){
         this.visualizationMethod = visMethod;
-        this.olapDataSetConfiguration = olapDataSetConfiguration;
+        this.OpenLAPDataSetConfiguration = OpenLAPDataSetConfiguration;
     }
 
     public long getId() {
@@ -48,11 +48,11 @@ public class VisualizationSuggestion {
         this.visualizationMethod = visualizationMethod;
     }
 
-    public String getOlapDataSetConfiguration() {
-        return olapDataSetConfiguration;
+    public String getOpenLAPDataSetConfiguration() {
+        return OpenLAPDataSetConfiguration;
     }
 
-    public void setOlapDataSetConfiguration(String olapDataSetConfiguration) {
-        this.olapDataSetConfiguration = olapDataSetConfiguration;
+    public void setOpenLAPDataSetConfiguration(String OpenLAPDataSetConfiguration) {
+        this.OpenLAPDataSetConfiguration = OpenLAPDataSetConfiguration;
     }
 }

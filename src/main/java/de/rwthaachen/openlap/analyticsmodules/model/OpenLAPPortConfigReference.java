@@ -1,8 +1,8 @@
 package de.rwthaachen.openlap.analyticsmodules.model;
 
-import DataSet.OLAPPortConfiguration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,18 +17,18 @@ public class OpenLAPPortConfigReference {
 //    String indicatorName;
 
     //HashMap to store the id and the name of the indicators related to the triad
-    Map<String, OLAPPortConfiguration> portConfigs;
+    Map<String, OpenLAPPortConfig> portConfigs;
 
 
     public OpenLAPPortConfigReference() {
-        portConfigs = new HashMap<String, OLAPPortConfiguration>();
+        portConfigs = new HashMap<String, OpenLAPPortConfig>();
     }
 
-    public Map<String, OLAPPortConfiguration> getPortConfigs() {
+    public Map<String, OpenLAPPortConfig> getPortConfigs() {
         return portConfigs;
     }
 
-    public void setPortConfigs(Map<String, OLAPPortConfiguration> portConfigs) {
+    public void setPortConfigs(Map<String, OpenLAPPortConfig> portConfigs) {
         this.portConfigs = portConfigs;
     }
 
