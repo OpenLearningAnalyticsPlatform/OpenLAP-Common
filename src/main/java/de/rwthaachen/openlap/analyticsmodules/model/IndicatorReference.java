@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +19,8 @@ public class IndicatorReference {
     //HashMap to store the id and the name of the indicators related to the triad
     Map<String, IndicatorEntry> indicators;
 
+    List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList;
+
 
     public IndicatorReference() {
         indicators = new HashMap<String, IndicatorEntry>();
@@ -31,6 +34,14 @@ public class IndicatorReference {
         this.indicators = indicators;
     }
 
+    public List<OpenLAPDataSetMergeMapping> getDataSetMergeMappingList() {
+        return dataSetMergeMappingList;
+    }
+
+    public void setDataSetMergeMappingList(List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList) {
+        this.dataSetMergeMappingList = dataSetMergeMappingList;
+    }
+
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
@@ -39,11 +50,12 @@ public class IndicatorReference {
         } catch (JsonProcessingException e) {
             return "IndicatorReference{" +
                     "indicators=" + indicators +
+                    ", dataSetMergeMappingList=" + dataSetMergeMappingList +
                     '}';
         }
     }
 
-    //    public IndicatorReference(long id, String indicatorName) {
+//    public IndicatorReference(long id, String indicatorName) {
 //        this.id = id;
 //        this.indicatorName = indicatorName;
 //    }

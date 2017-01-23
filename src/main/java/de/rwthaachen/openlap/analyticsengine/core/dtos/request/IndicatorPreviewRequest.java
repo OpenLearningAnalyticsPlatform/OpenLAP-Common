@@ -1,10 +1,10 @@
 package de.rwthaachen.openlap.analyticsengine.core.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.rwthaachen.openlap.analyticsmodules.model.OpenLAPDataSetMergeMapping;
 import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Arham Muslim
@@ -23,11 +23,13 @@ public class IndicatorPreviewRequest {
     private Map<String, String> visualizationInputParams;
     private Map<String, Object> additionalParams;
     private boolean isComposite;
+    List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList;
 
     public IndicatorPreviewRequest(){
         query = new HashMap<String, String>();
         analyticsMethodId = new HashMap<String, Long>();
         queryToMethodConfig = new HashMap<String, OpenLAPPortConfig>();
+        dataSetMergeMappingList = new ArrayList<OpenLAPDataSetMergeMapping>();
     }
 
     public Map<String, String> getQuery() {
@@ -108,5 +110,13 @@ public class IndicatorPreviewRequest {
 
     public void setVisualizationInputParams(Map<String, String> visualizationInputParams) {
         this.visualizationInputParams = visualizationInputParams;
+    }
+
+    public List<OpenLAPDataSetMergeMapping> getDataSetMergeMappingList() {
+        return dataSetMergeMappingList;
+    }
+
+    public void setDataSetMergeMappingList(List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList) {
+        this.dataSetMergeMappingList = dataSetMergeMappingList;
     }
 }
