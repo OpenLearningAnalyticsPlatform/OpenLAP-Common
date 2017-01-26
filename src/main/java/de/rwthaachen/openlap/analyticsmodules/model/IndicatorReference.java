@@ -21,6 +21,8 @@ public class IndicatorReference {
 
     List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList;
 
+    String indicatorType;
+
 
     public IndicatorReference() {
         indicators = new HashMap<String, IndicatorEntry>();
@@ -42,6 +44,14 @@ public class IndicatorReference {
         this.dataSetMergeMappingList = dataSetMergeMappingList;
     }
 
+    public String getIndicatorType() {
+        return indicatorType;
+    }
+
+    public void setIndicatorType(String indicatorType) {
+        this.indicatorType = indicatorType;
+    }
+
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
@@ -51,11 +61,12 @@ public class IndicatorReference {
             return "IndicatorReference{" +
                     "indicators=" + indicators +
                     ", dataSetMergeMappingList=" + dataSetMergeMappingList +
+                    ", indicatorType='" + indicatorType + '\'' +
                     '}';
         }
     }
 
-//    public IndicatorReference(long id, String indicatorName) {
+    //    public IndicatorReference(long id, String indicatorName) {
 //        this.id = id;
 //        this.indicatorName = indicatorName;
 //    }

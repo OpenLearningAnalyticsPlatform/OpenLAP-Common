@@ -22,7 +22,7 @@ public class IndicatorPreviewRequest {
     private Map<String, String> methodInputParams;
     private Map<String, String> visualizationInputParams;
     private Map<String, Object> additionalParams;
-    private boolean isComposite;
+    private String indicatorType;
     List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList;
 
     public IndicatorPreviewRequest(){
@@ -88,12 +88,12 @@ public class IndicatorPreviewRequest {
         this.additionalParams = additionalParams;
     }
 
-    public boolean isComposite() {
-        return isComposite;
+    public String getIndicatorType() {
+        return indicatorType;
     }
 
-    public void setComposite(boolean composite) {
-        isComposite = composite;
+    public void setIndicatorType(String indicatorType) {
+        this.indicatorType = indicatorType;
     }
 
     public Map<String, String> getMethodInputParams() {

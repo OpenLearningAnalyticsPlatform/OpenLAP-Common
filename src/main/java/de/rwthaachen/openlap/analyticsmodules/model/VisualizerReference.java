@@ -3,6 +3,8 @@ package de.rwthaachen.openlap.analyticsmodules.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Map;
+
 /**
  * This class represents a reference to a particular Visualizer technique of a Visualizing Library of the Visualizer
  * macro component of the OpenLAP. It is modeled after the corresponding Class on the Visualization
@@ -11,8 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class VisualizerReference {
     long frameworkId;
     long methodId;
-    String frameworkName;
-    String methodName;
+    Map<String, String> additionalParams;
 
     /**
      * Empty constructor
@@ -25,10 +26,12 @@ public class VisualizerReference {
      *
      * @param frameworkId ID of the Visualizer Framework
      * @param methodId    ID of the Visualizer Method
+     * @param additionalParams additional paramaters for the visualizer
      */
-    public VisualizerReference(long frameworkId, long methodId) {
+    public VisualizerReference(long frameworkId, long methodId, Map<String, String> additionalParams) {
         this.frameworkId = frameworkId;
         this.methodId = methodId;
+        this.additionalParams = additionalParams;
     }
 
     /**
@@ -36,26 +39,26 @@ public class VisualizerReference {
      *
      * @param frameworkName Name of the Visualizer Framework
      * @param methodName    Name of the Visualizer Method
-     */
+     *//*
     public VisualizerReference(String frameworkName, String methodName) {
         this.frameworkName = frameworkName;
         this.methodName = methodName;
     }
 
-    /**
+    *//**
      * Standard Constructor
      *
      * @param frameworkId   ID of the Visualizer Framework
      * @param methodId      ID of the Visualizer Method
      * @param frameworkName Name of the Visualizer Framework
      * @param methodName    Name of the Visualizer Method
-     */
+     *//*
     public VisualizerReference(long frameworkId, long methodId, String frameworkName, String methodName) {
         this.frameworkId = frameworkId;
         this.methodId = methodId;
         this.frameworkName = frameworkName;
         this.methodName = methodName;
-    }
+    }*/
 
     /**
      * @return ID of the Visualization Framework
@@ -85,33 +88,41 @@ public class VisualizerReference {
         this.methodId = methodId;
     }
 
-    /**
-     * @return Name of the Visualization Framework
-     */
-    public String getFrameworkName() {
-        return frameworkName;
+    public Map<String, String> getAdditionalParams() {
+        return additionalParams;
     }
 
-    /**
-     * @param frameworkName Name of the Visualization Framework to be set.
-     */
-    public void setFrameworkName(String frameworkName) {
-        this.frameworkName = frameworkName;
+    public void setAdditionalParams(Map<String, String> additionalParams) {
+        this.additionalParams = additionalParams;
     }
 
-    /**
-     * @return Name of the Visualization Method
-     */
-    public String getMethodName() {
-        return methodName;
-    }
-
-    /**
-     * @param methodName Name of the Visualization Method to be set.
-     */
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
+    //    /**
+//     * @return Name of the Visualization Framework
+//     */
+//    public String getFrameworkName() {
+//        return frameworkName;
+//    }
+//
+//    /**
+//     * @param frameworkName Name of the Visualization Framework to be set.
+//     */
+//    public void setFrameworkName(String frameworkName) {
+//        this.frameworkName = frameworkName;
+//    }
+//
+//    /**
+//     * @return Name of the Visualization Method
+//     */
+//    public String getMethodName() {
+//        return methodName;
+//    }
+//
+//    /**
+//     * @param methodName Name of the Visualization Method to be set.
+//     */
+//    public void setMethodName(String methodName) {
+//        this.methodName = methodName;
+//    }
 
     @Override
     public String toString() {
@@ -122,8 +133,7 @@ public class VisualizerReference {
             return "VisualizerReference{" +
                     "frameworkId=" + frameworkId +
                     ", methodId=" + methodId +
-                    ", frameworkName='" + frameworkName + '\'' +
-                    ", methodName='" + methodName + '\'' +
+                    ", additionalParams=" + additionalParams +
                     '}';
         }
     }

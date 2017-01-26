@@ -11,12 +11,12 @@ import java.io.IOException;
  * An object Mapper for the DataAccessLayer to convert an AnalyticsMethodReference to a String during persistence
  * operations
  */
-public class OpenLAPPortConfigReferenceConverter implements AttributeConverter<OpenLAPPortConfig, String> {
+public class OpenLAPPortConfigReferenceConverter implements AttributeConverter<OpenLAPPortConfigReference, String> {
 
     ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public String convertToDatabaseColumn(OpenLAPPortConfig attribute) {
+    public String convertToDatabaseColumn(OpenLAPPortConfigReference attribute) {
         try {
             return mapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
@@ -26,9 +26,9 @@ public class OpenLAPPortConfigReferenceConverter implements AttributeConverter<O
     }
 
     @Override
-    public OpenLAPPortConfig convertToEntityAttribute(String dbData) {
+    public OpenLAPPortConfigReference convertToEntityAttribute(String dbData) {
         try {
-            return mapper.readValue(dbData, OpenLAPPortConfig.class);
+            return mapper.readValue(dbData, OpenLAPPortConfigReference.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;

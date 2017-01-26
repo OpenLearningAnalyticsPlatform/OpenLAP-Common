@@ -19,7 +19,8 @@ public class Indicator {
     private long id;
 
     @Column(name = "query", columnDefinition = "TEXT", nullable = false)
-    private String query;
+    @Convert(converter = IndicatorQueryConverter.class)
+    private IndicatorQuery query;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -32,8 +33,8 @@ public class Indicator {
      */
     public Indicator() {
         this.name = "";
-        this.query = "";
         this.isComposite = false;
+        this.query = new IndicatorQuery();
     }
 
     /**
@@ -44,7 +45,7 @@ public class Indicator {
      * @param query
      * @param isComposite
      */
-    public Indicator(String name, String query, boolean isComposite) {
+    public Indicator(String name, IndicatorQuery query, boolean isComposite) {
         this.name = name;
         this.query = query;
         this.isComposite = isComposite;
@@ -58,11 +59,11 @@ public class Indicator {
         this.id = id;
     }
 
-    public String getQuery() {
+    public IndicatorQuery getQuery() {
         return query;
     }
 
-    public void setQuery(String query) {
+    public void setQuery(IndicatorQuery query) {
         this.query = query;
     }
 
@@ -106,7 +107,7 @@ public class Indicator {
         } catch (JsonProcessingException e) {
             return "Indicator{" +
                     "id=" + id +
-                    ", query='" + query + '\'' +
+                    ", query=" + query +
                     ", name='" + name + '\'' +
                     ", isComposite=" + isComposite +
                     '}';
