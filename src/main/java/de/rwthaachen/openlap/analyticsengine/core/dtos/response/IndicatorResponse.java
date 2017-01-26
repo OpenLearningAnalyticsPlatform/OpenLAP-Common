@@ -1,9 +1,10 @@
 package de.rwthaachen.openlap.analyticsengine.core.dtos.response;
 
-import de.rwthaachen.openlap.analyticsmodules.model.AnalyticsMethodEntry;
-import de.rwthaachen.openlap.analyticsmodules.model.IndicatorReference;
-import de.rwthaachen.openlap.analyticsmodules.model.VisualizerReference;
+import de.rwthaachen.openlap.analyticsmodules.model.*;
 import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Arham Muslim
@@ -11,38 +12,23 @@ import de.rwthaachen.openlap.dataset.OpenLAPPortConfig;
  */
 public class IndicatorResponse {
     private long id;
-    private String query;
-    private IndicatorReference indicatorReference;
-    private AnalyticsMethodEntry analyticsMethodReference;
-    private VisualizerReference visualizationReference;
-    private OpenLAPPortConfig queryToMethodConfig;
-    private OpenLAPPortConfig methodToVisualizationConfig;
     private String name;
+    private Map<String, String> query;
+    private IndicatorReference indicatorReference;
+    private AnalyticsMethodReference analyticsMethodReference;
+    private VisualizerReference visualizationReference;
+    private Map<String, OpenLAPPortConfig> queryToMethodConfig;
+    private OpenLAPPortConfig methodToVisualizationConfig;
+
+    private Map<String, String> methodInputParams;
+    private Map<String, String> visualizationInputParams;
+    private Map<String, Object> additionalParams;
+
+    List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList;
+
     private String parameters;
-    private boolean isComposite;
+    private String indicatorType;
     private String createdBy;
-
-    public IndicatorResponse() {
-    }
-
-    public IndicatorResponse(long id, String query, IndicatorReference indicatorReference,
-                             AnalyticsMethodEntry analyticsMethodReference,
-                             VisualizerReference visualizationReference,
-                             OpenLAPPortConfig queryToMethodConfig,
-                             OpenLAPPortConfig methodToVisualizationConfig,
-                             String name, String parameters, boolean isComposite, String createdBy) {
-        this.id = id;
-        this.query = query;
-        this.indicatorReference = indicatorReference;
-        this.analyticsMethodReference = analyticsMethodReference;
-        this.visualizationReference = visualizationReference;
-        this.queryToMethodConfig = queryToMethodConfig;
-        this.methodToVisualizationConfig = methodToVisualizationConfig;
-        this.name = name;
-        this.parameters = parameters;
-        this.isComposite = isComposite;
-        this.createdBy = createdBy;
-    }
 
     public long getId() {
         return id;
@@ -52,11 +38,19 @@ public class IndicatorResponse {
         this.id = id;
     }
 
-    public String getQuery() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<String, String> getQuery() {
         return query;
     }
 
-    public void setQuery(String query) {
+    public void setQuery(Map<String, String> query) {
         this.query = query;
     }
 
@@ -68,11 +62,11 @@ public class IndicatorResponse {
         this.indicatorReference = indicatorReference;
     }
 
-    public AnalyticsMethodEntry getAnalyticsMethodReference() {
+    public AnalyticsMethodReference getAnalyticsMethodReference() {
         return analyticsMethodReference;
     }
 
-    public void setAnalyticsMethodReference(AnalyticsMethodEntry analyticsMethodReference) {
+    public void setAnalyticsMethodReference(AnalyticsMethodReference analyticsMethodReference) {
         this.analyticsMethodReference = analyticsMethodReference;
     }
 
@@ -84,11 +78,11 @@ public class IndicatorResponse {
         this.visualizationReference = visualizationReference;
     }
 
-    public OpenLAPPortConfig getQueryToMethodConfig() {
+    public Map<String, OpenLAPPortConfig> getQueryToMethodConfig() {
         return queryToMethodConfig;
     }
 
-    public void setQueryToMethodConfig(OpenLAPPortConfig queryToMethodConfig) {
+    public void setQueryToMethodConfig(Map<String, OpenLAPPortConfig> queryToMethodConfig) {
         this.queryToMethodConfig = queryToMethodConfig;
     }
 
@@ -100,12 +94,28 @@ public class IndicatorResponse {
         this.methodToVisualizationConfig = methodToVisualizationConfig;
     }
 
-    public String getName() {
-        return name;
+    public Map<String, String> getMethodInputParams() {
+        return methodInputParams;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMethodInputParams(Map<String, String> methodInputParams) {
+        this.methodInputParams = methodInputParams;
+    }
+
+    public Map<String, String> getVisualizationInputParams() {
+        return visualizationInputParams;
+    }
+
+    public void setVisualizationInputParams(Map<String, String> visualizationInputParams) {
+        this.visualizationInputParams = visualizationInputParams;
+    }
+
+    public Map<String, Object> getAdditionalParams() {
+        return additionalParams;
+    }
+
+    public void setAdditionalParams(Map<String, Object> additionalParams) {
+        this.additionalParams = additionalParams;
     }
 
     public String getParameters() {
@@ -116,12 +126,12 @@ public class IndicatorResponse {
         this.parameters = parameters;
     }
 
-    public boolean isComposite() {
-        return isComposite;
+    public String getIndicatorType() {
+        return indicatorType;
     }
 
-    public void setComposite(boolean composite) {
-        isComposite = composite;
+    public void setIndicatorType(String indicatorType) {
+        this.indicatorType = indicatorType;
     }
 
     public String getCreatedBy() {
@@ -130,5 +140,13 @@ public class IndicatorResponse {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public List<OpenLAPDataSetMergeMapping> getDataSetMergeMappingList() {
+        return dataSetMergeMappingList;
+    }
+
+    public void setDataSetMergeMappingList(List<OpenLAPDataSetMergeMapping> dataSetMergeMappingList) {
+        this.dataSetMergeMappingList = dataSetMergeMappingList;
     }
 }
