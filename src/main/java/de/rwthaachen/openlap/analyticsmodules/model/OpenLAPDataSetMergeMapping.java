@@ -5,37 +5,50 @@ package de.rwthaachen.openlap.analyticsmodules.model;
  * on 23-Jan-17.
  */
 public class OpenLAPDataSetMergeMapping {
-    private String indReferenceKey1;
-    private String indReferenceKey2;
-    private String commonField;
+    private String indRefKey1;
+    private String indRefKey2;
+    private String indRefField1;
+    private String indRefField2;
 
-    public OpenLAPDataSetMergeMapping(String indReferenceKey1, String indReferenceKey2, String commonField) {
-        this.indReferenceKey1 = indReferenceKey1;
-        this.indReferenceKey2 = indReferenceKey2;
-        this.commonField = commonField;
+    public OpenLAPDataSetMergeMapping(String indRefKey1, String indRefKey2, String indRefField1, String indRefField2) {
+        this.indRefKey1 = indRefKey1;
+        this.indRefKey2 = indRefKey2;
+        this.indRefField1 = indRefField1;
+        this.indRefField2 = indRefField2;
     }
 
-    public String getIndReferenceKey1() {
-        return indReferenceKey1;
+    public OpenLAPDataSetMergeMapping() {
     }
 
-    public void setIndReferenceKey1(String indReferenceKey1) {
-        this.indReferenceKey1 = indReferenceKey1;
+    public String getIndRefKey1() {
+        return indRefKey1;
     }
 
-    public String getIndReferenceKey2() {
-        return indReferenceKey2;
+    public void setIndRefKey1(String indRefKey1) {
+        this.indRefKey1 = indRefKey1;
     }
 
-    public void setIndReferenceKey2(String indReferenceKey2) {
-        this.indReferenceKey2 = indReferenceKey2;
+    public String getIndRefKey2() {
+        return indRefKey2;
     }
 
-    public String getCommonField() {
-        return commonField;
+    public void setIndRefKey2(String indRefKey2) {
+        this.indRefKey2 = indRefKey2;
     }
 
-    public void setCommonField(String commonField) {
-        this.commonField = commonField;
+    public String getIndRefField1() {
+        return indRefField1;
+    }
+
+    public void setIndRefField1(String indRefField1) {
+        this.indRefField1 = indRefField1;
+    }
+
+    public String getIndRefField2() {
+        return indRefField2;
+    }
+
+    public void setIndRefField2(String indRefField2) {
+        this.indRefField2 = indRefField2;
     }
 }
